@@ -39,9 +39,8 @@ class Question(models.Model):
         return self.question_text
     
     # Handling time
-
-def was_published_recently(self):
-    return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
 class Choice(models.Model):
@@ -54,7 +53,7 @@ class Choice(models.Model):
     #  you give it a max_length. That’s used 
     # not only in the database schema, but in validation
 
-    choise_text = models.CharField(max_length = 200)
+    choice_text = models.CharField(max_length = 200)
 
     #  set the default value of votes to 0.
     votes = models.IntegerField(default = 0)
