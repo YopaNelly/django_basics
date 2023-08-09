@@ -1,5 +1,12 @@
 from django.db import models
+import datetime
 
+from django.utils import timezone
+
+"""
+adding custom method to this model
+
+"""
 # Create your models here.
 
 """
@@ -15,7 +22,26 @@ A Question has a question and
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    pub_data = models.DateTimeField("date published")
+    pub_date = models.DateTimeField("date published")
+
+    """
+    adding a __ste__() method to both Question and Choice
+
+    for this to return a string and not as bellow
+
+    "
+    objects.all() displays all the questions in the database.
+    >>> Question.objects.all()
+    <QuerySet [<Question: Question object (1)>]>
+    "
+    """
+    def __str__(self):
+        return self.question_text
+    
+    # Handling time
+
+def was_published_recently(self):
+    return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
 class Choice(models.Model):
@@ -32,3 +58,6 @@ class Choice(models.Model):
 
     #  set the default value of votes to 0.
     votes = models.IntegerField(default = 0)
+
+    def __str__(self):
+        return self.choice_text
